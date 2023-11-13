@@ -19,11 +19,11 @@ router.get('/findAllBookings', async (req, res) => {
 router.post('/findBookings', async (req, res) => {
   const { id, space_id, date, booked_by, vehicle_plate } = req.body;
 
-  if (date) if (!(date instanceof Date)) return res.status(400).json({ status: 'ERR', msg: 'date field need to be type Date' });
+  const newDate = new Date(date)
 
   let params = {};
   if (id) params._id = id;
-  if (date) params.date = date.setHours(0,0,0,0);
+  if (date) params.date = newDate.setHours(0,0,0,0);
   if (space_id) params.space_id = space_id;
   if (booked_by) params.booked_by = booked_by;
   if (vehicle_plate) params.vehicle_plate = vehicle_plate;
