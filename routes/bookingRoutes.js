@@ -41,8 +41,8 @@ router.post('/findBookings', async (req, res) => {
 router.post('/createBooking', async (req, res) => {
   const { space_id, user_id, date, vehicle_plate } = req.body;
 
-  if (!(date instanceof Date)) return res.status(400).json({ status: 'ERR', msg: 'date field need to be type Date' });
-  let newDate = date.setHours(0,0,0,0);
+  let newDate = new Date(date);
+  newDate.setHours(0,0,0,0)
   // let newDate = new Date(); date.setHours(0,0,0,0);
 
   try {
